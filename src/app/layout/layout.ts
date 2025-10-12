@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { ItemsListComponent } from '../components/items-list/items-list'; // <-- ДОДАЙТЕ ЦЕЙ ІМПОРТ
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    ItemsListComponent
   ],
   templateUrl: './layout.html',
-  styleUrls:['layout.css']
+  styleUrls:['./layout.css']
 })
 export class Layout {
-title: string = 'Знижки в магазинах';
-Dodatok: string = 'App';
+  title: string = 'Знижки в магазинах';
+  Dodatok: string = 'App';
 }

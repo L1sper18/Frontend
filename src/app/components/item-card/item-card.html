@@ -1,0 +1,12 @@
+<div class="card">
+  <img [src]="discountItem.imageUrl" *nglf="discountItem.imageUrl" alt="{{ discountItem.productName }}">
+  <div class="card-content">
+    <h3>{{ discountItem.productName }}</h3>
+    <p>Магазин: <strong>{{ discountItem.storeName }}</strong></p>
+    <div class="price-wrapper">
+      <span class="original-price">{{ discountItem.originalPrice | currency:'UAH' }}</span>
+      <span class="discount-price">{{ discountItem.discountPrice | currency:'UAH' }}</span>
+    </div>
+    <p class="valid-date">Дійсно до: {{ discountItem.validUntil | date:'dd.MM.yyyy' }}</p>
+  </div>
+</div>
