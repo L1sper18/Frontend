@@ -11,4 +11,5 @@ import { ProductDiscount } from '../../Shared/Models/product-discount.model';
 })
 export class ItemCardComponent {
   @Input() discountItem!: ProductDiscount; // @Input() дозволяє приймати дані ззовні
+  protected readonly Math = Math;
 }
