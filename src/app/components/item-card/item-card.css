@@ -72,3 +72,29 @@
   font-size: 0.9rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+/* ОНОВЛЕНІ СТИЛІ ДЛЯ ПОЗНАЧКИ (ЗАВДАННЯ 4):
+  Видалено position: absolute і змінено на inline-block.
+*/
+.hot-badge {
+  background-color: #f39c12; /* Помаранчевий */
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.8rem; /* Трохи менше */
+  display: inline-block; /* Щоб був в рядку */
+  margin-bottom: 10px; /* Відступ від заголовку */
+}
+
+/* СТИЛІ ДЛЯ ДАТИ (ЗАВДАННЯ 5) */
+.valid-date.expiring-soon {
+  color: #e74c3c; /* Червоний колір, як у ціни */
+  font-weight: 700;
+  font-size: 0.9rem; /* Трохи збільшимо шрифт */
+}
+.valid-date.expiring-soon {
+  color: #e74c3c; /* Червоний колір, як у ціни */
+  font-weight: 700;
+  font-size: 0.9rem; /* Трохи збільшимо шрифт */
+}

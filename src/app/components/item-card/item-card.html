@@ -6,12 +6,21 @@
   <img [src]="discountItem.imageUrl || 'https://placehold.co/600x400?text=No+Image'" alt="{{ discountItem.productName }}">
 
   <div class="card-content">
+
+    <div class="hot-badge"
+         *ngIf="Math.round(((discountItem.originalPrice - discountItem.discountPrice) / discountItem.originalPrice) * 100) > 13">
+      🔥 ГАРЯЧА!
+    </div>
+
     <h3>{{ discountItem.productName }}</h3>
     <p class="store-name">Магазин: <strong>{{ discountItem.storeName }}</strong></p>
     <div class="price-wrapper">
       <span class="original-price">{{ discountItem.originalPrice | currency:'UAH' }}</span>
       <span class="discount-price">{{ discountItem.discountPrice | currency:'UAH' }}</span>
     </div>
-    <p class="valid-date">Дійсно до: {{ discountItem.validUntil | date:'dd.MM.yyyy' }}</p>
+
+    <p class="valid-date" [ngClass]="{ 'expiring-soon': isExpiringSoon() }">
+      Дійсно до: {{ discountItem.validUntil | date:'dd.MM.yyyy' }}
+    </p>
   </div>
 </div>

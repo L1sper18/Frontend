@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// ВИПРАВЛЕНО: Правильний шлях до компонента item-card
 import { ItemCardComponent } from '../item-card/item-card';
-// ВИПРАВЛЕНО: Правильний шлях до моделі
 import { ProductDiscount } from '../../Shared/Models/product-discount.model';
 
 @Component({
@@ -41,7 +39,7 @@ export class ItemsListComponent {
       imageUrl: 'https://src.zakaz.atbmarket.com/cache/photos/20822/20822_276x276.jpg'
     }
   ];
-}
-
-export class ItemsList {
+  trackById(index: number, item: ProductDiscount): number {
+    return item.id;
+  }
 }
