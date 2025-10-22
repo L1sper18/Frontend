@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ItemCardComponent } from '../item-card/item-card';
+
 import { ProductDiscount } from '../../Shared/Models/product-discount.model';
 
 @Component({
@@ -19,7 +21,7 @@ export class ItemsListComponent {
       originalPrice: 45.50,
       discountPrice: 38.90,
       validUntil: new Date('2025-10-20'),
-      imageUrl: 'https://src.zakaz.atbmarket.com/cache/photos/10/10050/10050_276x276.jpg'
+      imageUrl: 'https://img.silpo.ua/products/1600x1600/1/185011.jpg'
     },
     {
       id: 2,
@@ -27,7 +29,8 @@ export class ItemsListComponent {
       storeName: 'Сільпо',
       originalPrice: 28.00,
       discountPrice: 24.50,
-      validUntil: new Date('2025-10-18')
+      validUntil: new Date('2025-10-18'),
+      imageUrl: 'https://img.zakaz.ua/upload/shop/products/3000000002130/3000000002130_1_1660293025_SRG_276x276.jpg'
     },
     {
       id: 3,
