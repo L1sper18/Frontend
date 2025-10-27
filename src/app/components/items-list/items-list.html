@@ -1,7 +1,18 @@
 <h2 class="list-title">Актуальні пропозиції</h2>
+
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Пошук за назвою або магазином..."
+    [(ngModel)]="searchTerm"
+    class="search-input"
+  >
+</div>
+
 <div class="list-container">
   <app-item-card
-    *ngFor="let item of discounts; trackBy: trackById"
-    [discountItem]="item">
+    *ngFor="let item of filteredDiscounts; trackBy: trackById"
+    [discountItem]="item"
+    (selectItem)="onItemSelected($event)">
   </app-item-card>
 </div>

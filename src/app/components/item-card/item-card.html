@@ -9,7 +9,7 @@
 
     <div class="hot-badge"
          *ngIf="Math.round(((discountItem.originalPrice - discountItem.discountPrice) / discountItem.originalPrice) * 100) > 13">
-      🔥 ГАРЯЧА!
+      ⚡ ГАРЯЧА!
     </div>
 
     <h3>{{ discountItem.productName }}</h3>
@@ -22,5 +22,9 @@
     <p class="valid-date" [ngClass]="{ 'expiring-soon': isExpiringSoon() }">
       Дійсно до: {{ discountItem.validUntil | date:'dd.MM.yyyy' }}
     </p>
+
+    <button class="details-button" (click)="onDetailsClick()">
+      Детальніше
+    </button>
   </div>
 </div>

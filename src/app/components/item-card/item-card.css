@@ -6,6 +6,8 @@
   overflow: hidden; /* Ховаємо все, що виходить за межі заокруглених кутів */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative; /* Необхідно для позиціонування значка знижки */
+  display: flex; /* Використовуємо flexbox для гнучкості */
+  flex-direction: column; /* Розташовуємо елементи в колонку */
 }
 
 .card:hover {
@@ -21,6 +23,9 @@
 
 .card-content {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Дозволяє цьому блоку рости і заповнювати простір */
 }
 
 .card-content h3 {
@@ -28,6 +33,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   min-height: 50px; /* Щоб картки мали однакову висоту тексту */
+  flex-grow: 1; /* Змушує назву займати простір, щоб кнопка була внизу */
 }
 
 .store-name {
@@ -58,6 +64,8 @@
   font-size: 0.8rem;
   color: #7f8c8d;
   text-align: right;
+  margin-top: auto; /* Притискає дату до низу блоку h3 */
+  margin-bottom: 10px;
 }
 
 .discount-badge {
@@ -89,4 +97,23 @@
   color: #e74c3c;
   font-weight: 700;
   font-size: 0.9rem;
+}
+
+/* ДОДАНО СТИЛІ ДЛЯ КНОПКИ (Завдання 3) */
+.details-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px; /* Відступ від дати */
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.details-button:hover {
+  background-color: #2980b9;
 }
