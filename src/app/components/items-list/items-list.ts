@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // <-- Імпорт для [(ngModel)] (Завдання 5)
+import { FormsModule } from '@angular/forms';
 
 import { ItemCardComponent } from '../item-card/item-card';
 import { ProductDiscount } from '../../Shared/Models/product-discount.model';
+import { DataService } from '../../Shared/Services/data.service'; // (Крок 5) Імпортуємо сервіс
 
 @Component({
   selector: 'app-items-list',
@@ -11,45 +12,17 @@ import { ProductDiscount } from '../../Shared/Models/product-discount.model';
   imports: [
     CommonModule,
     ItemCardComponent,
-    FormsModule // <-- Додано FormsModule сюди (Завдання 5)
+    FormsModule
   ],
   templateUrl: './items-list.html',
   styleUrls: ['./items-list.css']
 })
 export class ItemsListComponent implements OnInit {
 
-  // Оновлені дані з картинками
-  discounts: ProductDiscount[] = [
-    {
-      id: 1,
-      productName: 'Молоко "Яготинське" 2.6%',
-      storeName: 'АТБ',
-      originalPrice: 48.30,
-      discountPrice: 38.90,
-      validUntil: new Date('2025-10-20'),
-      imageUrl: 'assets/image/milk.webp' // Оновлено шлях
-    },
-    {
-      id: 2,
-      productName: 'Хліб "Київський" гречаний',
-      storeName: 'Сільпо',
-      originalPrice: 28.00,
-      discountPrice: 24.50,
-      validUntil: new Date('2025-10-18'),
-      imageUrl: 'assets/image/hlib_grechaniy.webp' // Оновлено шлях
-    },
-    {
-      id: 3,
-      productName: 'Куряче філе "Наша Ряба"',
-      storeName: 'Фора',
-      originalPrice: 243.00,
-      discountPrice: 198.00,
-      validUntil: new Date('2025-10-19'),
-      imageUrl: 'assets/image/chicken.png' // Оновлено шлях
-    }
-  ];
-
+  // (Крок 3) Масив з даними видалено. Тепер це пусті масиви.
+  discounts: ProductDiscount[] = [];
   public filteredDiscounts: ProductDiscount[] = [];
+
   private _searchTerm: string = '';
 
   get searchTerm(): string {
@@ -60,7 +33,20 @@ export class ItemsListComponent implements OnInit {
     this.filterDiscounts();
   }
 
+  /**
+   * (Крок 5)
+   * Впроваджуємо (інжектуємо) сервіс у конструктор.
+   */
+  constructor(private dataService: DataService) {}
+
   ngOnInit(): void {
+    /**
+     * (Крок 6)
+     * Отримуємо дані з сервісу при ініціалізації компонента.
+     */
+    this.discounts = this.dataService.getItems();
+
+    // Фільтруємо дані, які щойно отримали
     this.filterDiscounts();
   }
 
@@ -76,14 +62,8 @@ export class ItemsListComponent implements OnInit {
     return item.id;
   }
 
-  /**
-   * (Завдання 4)
-   * Обробник події "selectItem" від дочірнього компонента.
-   * ЦЕ САМЕ ТОЙ КОД, ЯКИЙ МАЄ "ПРАЦЮВАТИ" ПРИ НАТИСКАННІ
-   */
   onItemSelected(item: ProductDiscount): void {
     console.log('Обраний елемент (з батьківського компонента):', item);
-    // Виводимо alert для наочності
     alert(`Ви обрали: ${item.productName}\nМагазин: ${item.storeName}\nЦіна: ${item.discountPrice} грн`);
   }
 }
