@@ -18,7 +18,8 @@
 .card img {
   width: 100%;
   height: 200px;
-  object-fit: cover; /* Зображення буде гарно вписуватись в блок */
+  object-fit: contain; /* ЗМІНЕНО: Вписує зображення, нічого не обрізаючи */
+  background-color: #f9f9f9; /* ДОДАНО: Легкий фон для прозорих PNG */
 }
 
 .card-content {
