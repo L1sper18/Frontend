@@ -1,17 +1,18 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'; // Додайте Output та EventEmitter
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router'; // <-- Додано імпорт
 import { ProductDiscount } from '../../Shared/Models/product-discount.model';
 
 @Component({
   selector: 'app-item-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink], // <-- Додано сюди
   templateUrl: './item-card.html',
   styleUrls: ['./item-card.css']
 })
 export class ItemCardComponent {
   @Input() discountItem!: ProductDiscount;
-  @Output() selectItem = new EventEmitter<ProductDiscount>(); // (Завдання 3) Створюємо подію
+  @Output() selectItem = new EventEmitter<ProductDiscount>();
 
   protected readonly Math = Math;
   private today: Date = new Date('2025-10-17');
@@ -26,11 +27,6 @@ export class ItemCardComponent {
     return diffDays <= 2 && diffDays >= 0;
   }
 
-  /**
-   * (Завдання 3)
-   * Обробник кліку на кнопку "Детальніше".
-   * Випромінює подію "selectItem" з даними поточного товару.
-   */
   onDetailsClick(): void {
     this.selectItem.emit(this.discountItem);
   }

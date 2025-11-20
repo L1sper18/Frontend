@@ -7,10 +7,11 @@
 
   <div class="card-content">
 
-    <div class="hot-badge"
-         *ngIf="Math.round(((discountItem.originalPrice - discountItem.discountPrice) / discountItem.originalPrice) * 100) > 13">
-      ⚡ ГАРЯЧА!
-    </div>
+    @if (Math.round(((discountItem.originalPrice - discountItem.discountPrice) / discountItem.originalPrice) * 100) > 13) {
+      <div class="hot-badge">
+        ⚡ ГАРЯЧА!
+      </div>
+    }
 
     <h3>{{ discountItem.productName }}</h3>
     <p class="store-name">Магазин: <strong>{{ discountItem.storeName }}</strong></p>
@@ -23,8 +24,8 @@
       Дійсно до: {{ discountItem.validUntil | date:'dd.MM.yyyy' }}
     </p>
 
-    <button class="details-button" (click)="onDetailsClick()">
+    <a [routerLink]="['/items', discountItem.id]" class="details-button" style="text-decoration: none; text-align: center; display: block; box-sizing: border-box;">
       Детальніше
-    </button>
+    </a>
   </div>
 </div>

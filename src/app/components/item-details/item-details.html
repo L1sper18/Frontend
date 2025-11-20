@@ -1,0 +1,26 @@
+@if (item) {
+  <div class="details-container">
+    <div class="details-image">
+      <img [src]="item.imageUrl" [alt]="item.productName">
+    </div>
+
+    <div class="details-info">
+      <h2>{{ item.productName }}</h2>
+      <p class="store">Магазин: <strong>{{ item.storeName }}</strong></p>
+
+      <div class="prices">
+        <span class="old-price">{{ item.originalPrice | currency:'UAH' }}</span>
+        <span class="new-price">{{ item.discountPrice | currency:'UAH' }}</span>
+      </div>
+
+      <p class="validity">Акція діє до: {{ item.validUntil | date:'dd.MM.yyyy' }}</p>
+
+      <a routerLink="/items" class="back-button">← Повернутися до списку</a>
+    </div>
+  </div>
+} @else {
+  <div class="error">
+    <h2>Товар не знайдено!</h2>
+    <a routerLink="/items" class="back-button">На головну</a>
+  </div>
+}

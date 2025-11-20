@@ -10,9 +10,10 @@
 </div>
 
 <div class="list-container">
-  <app-item-card
-    *ngFor="let item of filteredDiscounts; trackBy: trackById"
-    [discountItem]="item"
-    (selectItem)="onItemSelected($event)">
-  </app-item-card>
+  @for (item of filteredDiscounts; track item.id) {
+    <app-item-card
+      [discountItem]="item"
+      (selectItem)="onItemSelected($event)">
+    </app-item-card>
+  }
 </div>
