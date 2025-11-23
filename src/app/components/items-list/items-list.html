@@ -10,7 +10,7 @@
 </div>
 
 <div class="list-container">
-  @for (item of filteredDiscounts; track item.id) {
+  @for (item of items$ | async; track item.id) {
     <app-item-card
       [discountItem]="item"
       (selectItem)="onItemSelected($event)">

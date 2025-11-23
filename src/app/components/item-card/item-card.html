@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" appHighlight>
   <div class="discount-badge">
     -{{ Math.round(((discountItem.originalPrice - discountItem.discountPrice) / discountItem.originalPrice) * 100) }}%
   </div>
@@ -13,7 +13,8 @@
       </div>
     }
 
-    <h3>{{ discountItem.productName }}</h3>
+    <h3>{{ discountItem.productName | truncate:20 }}</h3>
+
     <p class="store-name">Магазин: <strong>{{ discountItem.storeName }}</strong></p>
     <div class="price-wrapper">
       <span class="original-price">{{ discountItem.originalPrice | currency:'UAH' }}</span>
