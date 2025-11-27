@@ -1,0 +1,91 @@
+<div class="form-container">
+  <h2>Додати нову знижку</h2>
+
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="productName">Назва товару</label>
+      <input
+        id="productName"
+        type="text"
+        formControlName="productName"
+        [class.invalid]="itemForm.get('productName')?.invalid && itemForm.get('productName')?.touched"
+      >
+      @if (itemForm.get('productName')?.invalid && itemForm.get('productName')?.touched) {
+        <small class="error-msg">Назва обов'язкова (мін. 3 символи)</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="storeName">Магазин</label>
+      <input
+        id="storeName"
+        type="text"
+        formControlName="storeName"
+        [class.invalid]="itemForm.get('storeName')?.invalid && itemForm.get('storeName')?.touched"
+      >
+      @if (itemForm.get('storeName')?.invalid && itemForm.get('storeName')?.touched) {
+        <small class="error-msg">Вкажіть назву магазину</small>
+      }
+    </div>
+
+    <div class="prices-row">
+      <div class="form-group">
+        <label for="originalPrice">Звичайна ціна (грн)</label>
+        <input
+          id="originalPrice"
+          type="number"
+          step="0.01"
+          formControlName="originalPrice"
+          [class.invalid]="itemForm.get('originalPrice')?.invalid && itemForm.get('originalPrice')?.touched"
+        >
+        @if (itemForm.get('originalPrice')?.invalid && itemForm.get('originalPrice')?.touched) {
+          <small class="error-msg">Введіть коректну ціну</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="discountPrice">Ціна зі знижкою (грн)</label>
+        <input
+          id="discountPrice"
+          type="number"
+          step="0.01"
+          formControlName="discountPrice"
+          [class.invalid]="itemForm.get('discountPrice')?.invalid && itemForm.get('discountPrice')?.touched"
+        >
+        @if (itemForm.get('discountPrice')?.invalid && itemForm.get('discountPrice')?.touched) {
+          <small class="error-msg">Введіть коректну ціну</small>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="validUntil">Діє до</label>
+      <input
+        id="validUntil"
+        type="date"
+        formControlName="validUntil"
+        [class.invalid]="itemForm.get('validUntil')?.invalid && itemForm.get('validUntil')?.touched"
+      >
+      @if (itemForm.get('validUntil')?.invalid && itemForm.get('validUntil')?.touched) {
+        <small class="error-msg">Оберіть дату закінчення акції</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Посилання на зображення (URL)</label>
+      <input
+        id="imageUrl"
+        type="text"
+        placeholder="https://example.com/image.jpg"
+        formControlName="imageUrl"
+      >
+    </div>
+
+    <div class="actions">
+      <a routerLink="/items" class="btn-cancel">Скасувати</a>
+      <button type="submit" [disabled]="itemForm.invalid" class="btn-submit">Зберегти</button>
+    </div>
+
+  </form>
+</div>

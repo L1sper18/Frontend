@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule, AsyncPipe } from '@angular/common'; // Додано AsyncPipe
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router'; // <-- 1. Імпортуємо RouterLink
 import { Observable } from 'rxjs';
 
 import { ItemCardComponent } from '../item-card/item-card';
@@ -14,7 +15,8 @@ import { DataService } from '../../Shared/Services/data.service';
     CommonModule,
     ItemCardComponent,
     FormsModule,
-    AsyncPipe // Важливо імпортувати це
+    AsyncPipe,
+    RouterLink // <-- 2. Додаємо сюди, щоб шаблон "розумів" routerLink
   ],
   templateUrl: './items-list.html',
   styleUrls: ['./items-list.css']

@@ -58,8 +58,22 @@ export class DataService {
     this.itemsSubject.next(filteredItems);
   }
 
-  // (Завдання 7) Доданий метод
   public getItemById(id: number): ProductDiscount | undefined {
     return this.discounts.find(item => item.id === id);
+  }
+
+  // --- НОВИЙ МЕТОД ДЛЯ ЗАВДАННЯ №9 ---
+  public addItem(newItem: Omit<ProductDiscount, 'id'>): void {
+    // Знаходимо максимальний існуючий ID, щоб згенерувати наступний
+    const maxId = this.discounts.reduce((max, item) => item.id > max ? item.id : max, 0);
+
+    const item: ProductDiscount = {
+      id: maxId + 1,
+      ...newItem
+    };
+
+    this.discounts.push(item);
+    // Оновлюємо потік даних, щоб усі підписники отримали новий список
+    this.itemsSubject.next(this.discounts);
   }
 }

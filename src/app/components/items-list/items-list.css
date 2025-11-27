@@ -6,10 +6,9 @@
   margin-bottom: 40px;
 }
 
-/* ДОДАНО СТИЛІ ДЛЯ ПОШУКУ (Завдання 5) */
 .search-container {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Трохи зменшив відступ */
 }
 
 .search-input {
@@ -27,19 +26,35 @@
   border-color: #3498db;
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
 }
-/* -------------------------------------- */
 
-.list-title {
+/* --- СТИЛІ ДЛЯ КНОПКИ ДОДАВАННЯ --- */
+.actions-container {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2c3e50;
   margin-bottom: 40px;
 }
+
+.add-button {
+  display: inline-block;
+  background-color: #27ae60; /* Зелений колір */
+  color: white;
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: #219150;
+  transform: translateY(-2px);
+}
+/* ---------------------------------- */
 
 .list-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px; /* Відстань між картками */
+  gap: 30px;
 }

@@ -9,6 +9,12 @@
   >
 </div>
 
+<div class="actions-container">
+  <a routerLink="/add-item" class="add-button">
+    + Додати знижку
+  </a>
+</div>
+
 <div class="list-container">
   @for (item of items$ | async; track item.id) {
     <app-item-card
