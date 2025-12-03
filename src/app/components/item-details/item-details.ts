@@ -22,7 +22,12 @@ export class ItemDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.item = this.dataService.getItemById(id);
+      // БУЛО: this.item = this.dataService.getItemById(id);
+      // СТАЛО: (чекаємо відповідь від сервера)
+      this.dataService.getItemById(id).subscribe({
+        next: (data) => this.item = data,
+        error: (err) => console.error('Товар не знайдено', err)
+      });
     }
   }
 }

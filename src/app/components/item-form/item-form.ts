@@ -7,7 +7,7 @@ import { DataService } from '../../Shared/Services/data.service';
 @Component({
   selector: 'app-item-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Імпортуємо модуль реактивних форм
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './item-form.html',
   styleUrls: ['./item-form.css']
 })
@@ -19,39 +19,41 @@ export class ItemFormComponent {
     private dataService: DataService,
     private router: Router
   ) {
-    // Створення форми з валідаторами
     this.itemForm = this.fb.group({
       productName: ['', [Validators.required, Validators.minLength(3)]],
       storeName: ['', Validators.required],
       originalPrice: [null, [Validators.required, Validators.min(0.01)]],
       discountPrice: [null, [Validators.required, Validators.min(0.01)]],
       validUntil: ['', Validators.required],
-      imageUrl: [''] // Поле необов'язкове
+      imageUrl: ['']
     });
   }
 
   onSubmit(): void {
     if (this.itemForm.valid) {
-      // Отримуємо значення з форми
       const formValue = this.itemForm.value;
 
-      // Готуємо об'єкт для сервісу (конвертуємо рядок дати в об'єкт Date)
       const newItem = {
         productName: formValue.productName,
         storeName: formValue.storeName,
         originalPrice: Number(formValue.originalPrice),
         discountPrice: Number(formValue.discountPrice),
-        validUntil: new Date(formValue.validUntil),
-        imageUrl: formValue.imageUrl || '' // Якщо пусто, буде порожній рядок (у картці є заглушка)
+        validUntil: formValue.validUntil, // json-server приймає рядок дати
+        imageUrl: formValue.imageUrl || ''
       };
 
-      // Викликаємо сервіс
-      this.dataService.addItem(newItem);
-
-      // Перенаправляємо користувача назад до списку
-      this.router.navigate(['/items']);
+      // БУЛО: this.dataService.addItem(newItem); this.router.navigate...
+      // СТАЛО: (чекаємо підтвердження збереження)
+      this.dataService.addItem(newItem).subscribe({
+        next: () => {
+          this.router.navigate(['/items']);
+        },
+        error: (err) => {
+          console.error('Помилка:', err);
+          alert('Помилка при збереженні!');
+        }
+      });
     } else {
-      // Якщо форма невалідна, позначаємо всі поля як "доторкані", щоб показати помилки
       this.itemForm.markAllAsTouched();
     }
   }

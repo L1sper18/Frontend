@@ -1,79 +1,68 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core'; // <-- Додали імпорти
+import { isPlatformBrowser } from '@angular/common'; // <-- Додали імпорт
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ProductDiscount } from '../Models/product-discount.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
-  private discounts: ProductDiscount[] = [
-    {
-      id: 1,
-      productName: 'Молоко "Яготинське" 2.6%',
-      storeName: 'АТБ',
-      originalPrice: 48.30,
-      discountPrice: 38.90,
-      validUntil: new Date('2025-10-20'),
-      imageUrl: 'assets/image/milk.webp'
-    },
-    {
-      id: 2,
-      productName: 'Хліб "Київський" гречаний',
-      storeName: 'Сільпо',
-      originalPrice: 28.00,
-      discountPrice: 24.50,
-      validUntil: new Date('2025-10-18'),
-      imageUrl: 'assets/image/hlib_grechaniy.webp'
-    },
-    {
-      id: 3,
-      productName: 'Куряче філе "Наша Ряба"',
-      storeName: 'Фора',
-      originalPrice: 243.00,
-      discountPrice: 198.00,
-      validUntil: new Date('2025-10-19'),
-      imageUrl: 'assets/image/chicken.png'
-    }
-  ];
-
-  private itemsSubject = new BehaviorSubject<ProductDiscount[]>(this.discounts);
+  private apiUrl = 'items';
+  private itemsSubject = new BehaviorSubject<ProductDiscount[]>([]);
   public items$: Observable<ProductDiscount[]> = this.itemsSubject.asObservable();
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object // <-- Отримуємо ID платформи
+  ) {
+    this.loadItems();
+  }
+
+  private loadItems(): void {
+    // ВАЖЛИВО: Робимо запит ТІЛЬКИ якщо ми в браузері
+    if (isPlatformBrowser(this.platformId)) {
+      this.http.get<ProductDiscount[]>(this.apiUrl)
+        .pipe(catchError(this.handleError))
+        .subscribe(data => {
+          this.itemsSubject.next(data);
+        });
+    }
+  }
 
   public updateFilter(searchTerm: string): void {
-    const term = searchTerm.toLowerCase().trim();
+    // Теж перевіряємо, чи ми в браузері
+    if (isPlatformBrowser(this.platformId)) {
+      const term = searchTerm.toLowerCase().trim();
+      let url = this.apiUrl;
+      if (term) {
+        url += `?q=${term}`;
+      }
 
-    if (!term) {
-      this.itemsSubject.next(this.discounts);
-      return;
+      this.http.get<ProductDiscount[]>(url)
+        .pipe(catchError(this.handleError))
+        .subscribe(data => {
+          this.itemsSubject.next(data);
+        });
     }
-
-    const filteredItems = this.discounts.filter(item =>
-      item.productName.toLowerCase().includes(term) ||
-      item.storeName.toLowerCase().includes(term)
-    );
-
-    this.itemsSubject.next(filteredItems);
   }
 
-  public getItemById(id: number): ProductDiscount | undefined {
-    return this.discounts.find(item => item.id === id);
+  public getItemById(id: number): Observable<ProductDiscount> {
+    return this.http.get<ProductDiscount>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  // --- НОВИЙ МЕТОД ДЛЯ ЗАВДАННЯ №9 ---
-  public addItem(newItem: Omit<ProductDiscount, 'id'>): void {
-    // Знаходимо максимальний існуючий ID, щоб згенерувати наступний
-    const maxId = this.discounts.reduce((max, item) => item.id > max ? item.id : max, 0);
+  public addItem(newItem: Omit<ProductDiscount, 'id'>): Observable<ProductDiscount> {
+    return this.http.post<ProductDiscount>(this.apiUrl, newItem)
+      .pipe(
+        tap(() => this.loadItems()),
+        catchError(this.handleError)
+      );
+  }
 
-    const item: ProductDiscount = {
-      id: maxId + 1,
-      ...newItem
-    };
-
-    this.discounts.push(item);
-    // Оновлюємо потік даних, щоб усі підписники отримали новий список
-    this.itemsSubject.next(this.discounts);
+  private handleError(error: HttpErrorResponse) {
+    console.error('Сталася помилка API:', error);
+    let errorMessage = 'Щось пішло не так; спробуйте пізніше.';
+    return throwError(() => new Error(errorMessage));
   }
 }
