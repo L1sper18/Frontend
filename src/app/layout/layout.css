@@ -5,30 +5,107 @@
 }
 
 header {
-  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC); /* Гарний градієнт */
+  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC); /* Синій градієнт */
   color: white;
-  padding: 20px 40px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  position: sticky; /* Робимо хедер "липким" */
+  padding: 15px 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: sticky;
   top: 0;
   z-index: 1000;
+
+  /* Вирівнювання: заголовок зліва, кнопки справа */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 {
   margin: 0;
-  font-weight: 700;
-  font-size: 2rem;
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
 }
 
+/* --- СТИЛІ ДЛЯ КНОПОК В ХЕДЕРІ --- */
+.auth-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Відстань між кнопками */
+}
+
+/* Загальний стиль для посилань-кнопок */
+.nav-btn {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  display: inline-block; /* Щоб посилання мали розмір як кнопки */
+}
+
+/* Кнопка Вхід (прозора з білою рамкою) */
+.login-btn {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.6);
+  background-color: transparent;
+}
+
+.login-btn:hover {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Кнопка Реєстрація (Біла кнопка, синій текст) */
+.register-btn {
+  background-color: white;
+  color: #0052D4; /* Колір тексту як основний колір градієнта */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.register-btn:hover {
+  transform: translateY(-2px); /* Легкий підйом при наведенні */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  background-color: #f8f9fa;
+}
+
+/* Кнопка Вийти */
+.logout-btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+}
+
+.logout-btn:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* --- ОСНОВНИЙ КОНТЕНТ --- */
 main {
-  flex-grow: 1; /* Змушує основний контент займати весь доступний простір */
+  flex-grow: 1;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 footer {
-  background-color: #2c3e50; /* Темний фон */
-  color: #ecf0f1; /* Світлий текст */
+  background-color: #2c3e50;
+  color: #ecf0f1;
   text-align: center;
   padding: 20px;
+  margin-top: auto;
 }

@@ -5,8 +5,9 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { baseUrlInterceptor } from './Shared/Interceptors/base-url.interceptor';
-// Додай цей імпорт:
 import { errorInterceptor } from './Shared/Interceptors/error.interceptor';
+// Додай цей імпорт:
+import { authInterceptor } from './Shared/Interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,8 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
-      // Додай errorInterceptor сюди:
-      withInterceptors([baseUrlInterceptor, errorInterceptor])
+      // Додаємо authInterceptor до списку:
+      withInterceptors([baseUrlInterceptor, authInterceptor, errorInterceptor])
     )
   ]
 };

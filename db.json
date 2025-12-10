@@ -2,30 +2,46 @@
   "items": [
     {
       "id": 1,
-      "productName": "Молоко \"Яготинське\" 2.6%",
+      "productName": "Молоко Яготинське 2.6%",
       "storeName": "АТБ",
-      "originalPrice": 48.30,
-      "discountPrice": 38.90,
-      "validUntil": "2025-10-20",
+      "originalPrice": 42.5,
+      "discountPrice": 36.9,
+      "validUntil": "2025-12-31",
       "imageUrl": "assets/image/milk.webp"
     },
     {
       "id": 2,
-      "productName": "Хліб \"Київський\" гречаний",
+      "productName": "Хліб Гречаний",
       "storeName": "Сільпо",
-      "originalPrice": 28.00,
-      "discountPrice": 24.50,
-      "validUntil": "2025-10-18",
+      "originalPrice": 28,
+      "discountPrice": 22.5,
+      "validUntil": "2025-10-20",
       "imageUrl": "assets/image/hlib_grechaniy.webp"
     },
     {
       "id": 3,
-      "productName": "Куряче філе \"Наша Ряба\"",
-      "storeName": "Фора",
-      "originalPrice": 243.00,
-      "discountPrice": 198.00,
-      "validUntil": "2025-10-19",
+      "productName": "Філе куряче",
+      "storeName": "Novus",
+      "originalPrice": 180,
+      "discountPrice": 149.99,
+      "validUntil": "2025-11-15",
       "imageUrl": "assets/image/chicken.png"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "fullName": "Головний Адмін",
+      "role": "admin"
+    },
+    {
+      "id": "1eac",
+      "fullName": "Молодика Олександр",
+      "email": "yanamolodmail.ru@gmail.com",
+      "password": "sasamolod",
+      "role": "user"
     }
   ]
 }
