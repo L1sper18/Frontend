@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": 1,
+      "id": "1",
       "productName": "Молоко Яготинське 2.6%",
       "storeName": "АТБ",
       "originalPrice": 42.5,
@@ -10,7 +10,7 @@
       "imageUrl": "assets/image/milk.webp"
     },
     {
-      "id": 2,
+      "id": "2",
       "productName": "Хліб Гречаний",
       "storeName": "Сільпо",
       "originalPrice": 28,
@@ -19,13 +19,31 @@
       "imageUrl": "assets/image/hlib_grechaniy.webp"
     },
     {
-      "id": 3,
+      "id": "3",
       "productName": "Філе куряче",
       "storeName": "Novus",
       "originalPrice": 180,
       "discountPrice": 149.99,
       "validUntil": "2025-11-15",
       "imageUrl": "assets/image/chicken.png"
+    },
+    {
+      "id": "b951",
+      "productName": "Cypress Test Bread",
+      "storeName": "Cyber Store",
+      "originalPrice": 50,
+      "discountPrice": 25,
+      "validUntil": "2025-12-31",
+      "imageUrl": ""
+    },
+    {
+      "id": "8b93",
+      "productName": "Cypress Test Bread",
+      "storeName": "Cyber Store",
+      "originalPrice": 50,
+      "discountPrice": 25,
+      "validUntil": "2025-12-31",
+      "imageUrl": ""
     }
   ],
   "users": [
